@@ -1,2 +1,2 @@
-# Software-Engineering-Kang-Huang
+# SoftwareEngineering-Group 6
 Software Engineering group project
