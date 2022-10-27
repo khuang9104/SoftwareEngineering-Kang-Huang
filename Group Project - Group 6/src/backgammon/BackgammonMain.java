@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class BackgammonMain {
 
+	private static CommandExcutor command_excutor = new CommandExcutor();
 	private static Scanner scanner = new Scanner(System.in);
 	private static Gameboard gameboard = new Gameboard();
-	private static Dice dice = new Dice();
 	private static Points points = new Points();
 	private static String[] player_name = new String[2];
 	private static int player_sequence = 0;
@@ -21,7 +21,7 @@ public class BackgammonMain {
 		while (end_flag == false) {
 			System.out.printf("It is %s's turn, please enter 'roll' to roll your dice.\n",
 					player_name[player_sequence]);
-			basicCommandExcutor();
+			roll_result = command_excutor.basicCommand(points);
 			if (roll_result[0] != roll_result[1]) {
 				System.out.printf("%s rolls %d & %d.\n", player_name[player_sequence], roll_result[0], roll_result[1]);
 			} else {
@@ -72,11 +72,11 @@ public class BackgammonMain {
 		boolean flag = false;
 		while (flag == false) {
 			System.out.printf("It is %s's turn, please enter 'roll' to roll your dice.\n", player_name[0]);
-			basicCommandExcutor();
+			roll_result = command_excutor.basicCommand(points);
 			int dice_result_B = roll_result[0];
 			System.out.printf("%s rolls %d.\n", player_name[0], dice_result_B);
 			System.out.printf("It is %s's turn, please enter 'roll' to roll your dice.\n", player_name[1]);
-			basicCommandExcutor();
+			roll_result = command_excutor.basicCommand(points);
 			int dice_result_R = roll_result[0];
 			System.out.printf("%s rolls %d.\n", player_name[1], dice_result_R);
 			if (dice_result_B > dice_result_R) {
@@ -92,63 +92,6 @@ public class BackgammonMain {
 			if (dice_result_B == dice_result_R) {
 				System.out.println("Equal numbers! Please roll again.");
 				flag = false;
-			}
-		}
-	}
-
-	public static void rollDice() {
-		roll_result[0] = dice.rollDice();
-		roll_result[1] = dice.rollDice();
-		if (roll_result[0] != roll_result[1]) {
-			roll_result[2] = 0;
-			roll_result[3] = 0;
-		} else {
-			roll_result[2] = roll_result[0];
-			roll_result[3] = roll_result[1];
-		}
-	}
-
-	public static void basicCommandExcutor() {
-		boolean flag = false;
-		boolean flag_menu = false;
-		String input;
-		while (flag == false) {
-			flag = false;
-			input = scanner.nextLine();
-			if (input.equals("roll")) {
-				rollDice();
-				flag = true;
-			} else if (input.equals("menu")) {
-				flag_menu = false;
-				while (flag_menu == false) {
-					System.out.println(
-							"Enter 'tips' for operation tips and 'quit' to exit the game or 'c' to continue the game.");
-					input = scanner.nextLine();
-					if (input.equals("quit")) {
-						gameboard.printGameboard(points);
-						System.out.println("Quit the game successfully");
-						System.exit(0);
-					}
-					else if (input.equals("tips")) {
-						gameboard.printGameboard(points);
-						System.out.println("Put tips here");
-						// TBD
-						flag_menu = true;
-						System.out.println("Please enter 'roll' to roll your dice or 'menu' for more info.");
-					}
-					else if (input.equals("c")) {
-						flag_menu = true;
-						gameboard.printGameboard(points);
-						System.out.println("Please enter 'roll' to roll your dice or 'menu' for more info.");
-						
-					} else {
-						gameboard.printGameboard(points);
-						System.out.println(
-								"Entry error, please enter 'tips' for operation tips and 'quit' to exit the game or 'c' to continue the game.");
-					}
-				}
-			} else {
-				System.out.println("Entry error, please enter 'roll' to roll your dice or 'menu' for more info.");
 			}
 		}
 	}

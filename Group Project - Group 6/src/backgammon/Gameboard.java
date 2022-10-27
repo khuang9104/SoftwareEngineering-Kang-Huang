@@ -129,7 +129,7 @@ public class Gameboard {
 
 		}
 	}
-	// Method 2: use this to update the whole game board after any checker movement.
+	// Method 2: use this to update the whole game board.
 
 	public void setNames(String[] names) {
 		this.player_name[0] = names[0];
