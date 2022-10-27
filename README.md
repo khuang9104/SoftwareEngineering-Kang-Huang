@@ -24,11 +24,13 @@ Basic input and output components added and tested, 'quit' command works well.
 
 
 ### Sprint 2: Game
-#### 1. A feature whereby when the game starts, the program rolls one die for each player to determine which player goes first. The result is used for the first move.
-
+#### 1. A feature whereby when the game starts, the program rolls one die for each player to determine which player goes first. The result is used for the first move. (Done. Checked on Oct.28.2022 by Kang)
+Oct.28.2022 Kang:<br>
+Feature added and tested, each player can roll a dice to determined who go first when game start. (When equal, ask to reroll).
    
-#### 2. A feature whereby the current player is indicated on the display.
-
+#### 2. A feature whereby the current player is indicated on the display. (Done. Checked on Oct.28.2022 by Kang)
+Oct.28.2022 Kang:<br>
+The feature was added and tested and the prompt will show whose turn it is.
 
 #### 3. A feature that displays the pip number of every point on the board. The pip numbers should change depending on which player’s turn it is.
 
