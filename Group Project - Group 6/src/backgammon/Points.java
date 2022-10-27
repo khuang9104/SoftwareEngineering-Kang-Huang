@@ -5,9 +5,10 @@ import java.util.Stack;
 
 public class Points {
 	
-    Checker checker_red = new Checker("Red");
-    Checker checker_white = new Checker("Black");
-	ArrayList<Stack<String>> points = new ArrayList<Stack<String>>();
+	private Checker checker_red = new Checker("Red");
+	private Checker checker_white = new Checker("Black");
+    private ArrayList<Stack<String>> points = new ArrayList<Stack<String>>();
+    // Using an ArrayList to store multiple stacks, each stack stand for a point(Total 24 points)
 
 	public Points() {
 		for (int i = 0; i < 24; i++) {
@@ -15,20 +16,22 @@ public class Points {
 		}
 		initialPoints();
 	}
+	// Constructor
 
-	public void pushPoints(int pointsNum, String checker) {
-		points.get(pointsNum-1).push(checker);
-
+	public void pushPoints(int pointsNum, String checkercolor) {
+		points.get(pointsNum-1).push(checkercolor);
 	}
+	// Method 1: push a checker into a specific point 
 
 	public boolean popPoints(int pointsNum) {
 		boolean flag = false;
-		if(points.get(pointsNum-1).isEmpty() == false) {
+		if (points.get(pointsNum-1).isEmpty() == false) {
 			points.get(pointsNum-1).pop();
 			flag = true;
 		}
 		return flag;
 	}
+	// Method 2: pop a checker from a specific point. It will return a 'False' if the point is empty before pop. 
 
 	public String peekPoints(int pointsNum) {
 		String result = "empty";
@@ -37,14 +40,16 @@ public class Points {
 		}
 		return result;
 	}
+	// Method 3: peek a checker from a specific point. Return the color of check in the top of specific point(stack). 
 	
-	public int sizePoints(int pointsNum) {
+	public int size(int pointsNum) {
 		int result = 0;
 		if(points.get(pointsNum-1).isEmpty() == false) {
 			result = points.get(pointsNum-1).size();
 		}
 		return result;
 	}
+	// Method 4: check how many checker in specific point. Return the result.
 	
 	public void initialPoints() {
 		for (int i = 0; i < 2; i++) { 
@@ -68,5 +73,6 @@ public class Points {
 			points.get(24-1).push(checker_white.getCheckerColor());
 		}
 	}
+	// Method 5: initial the points, when game start.
 
 }
