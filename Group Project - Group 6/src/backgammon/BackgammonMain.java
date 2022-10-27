@@ -22,6 +22,7 @@ public class BackgammonMain {
 			System.out.printf("It is %s's turn, please enter 'roll' to roll your dice.\n",
 					player_name[player_sequence]);
 			roll_result = command_excutor.basicCommand(points);
+			gameboard.printGameboard(points);
 			if (roll_result[0] != roll_result[1]) {
 				System.out.printf("%s rolls %d & %d.\n", player_name[player_sequence], roll_result[0], roll_result[1]);
 			} else {
@@ -29,6 +30,11 @@ public class BackgammonMain {
 						player_name[player_sequence], roll_result[0], roll_result[1], player_name[player_sequence],
 						roll_result[0], roll_result[1], roll_result[2], roll_result[3]);
 			}
+			System.out.println("Select a point and move your checkers from that point (Enter the point number)");
+			
+			
+			
+			
 			player_sequence++;
 			if (player_sequence == 2) {
 				player_sequence = 0;

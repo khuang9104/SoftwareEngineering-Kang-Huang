@@ -60,6 +60,11 @@ public class CommandExcutor {
 			}
 		}
 	}
+	
+	public static void moveCommand() {
+		
+	}
+	
 
 	public static void rollDice() {
 		roll_result[0] = dice.rollDice();
