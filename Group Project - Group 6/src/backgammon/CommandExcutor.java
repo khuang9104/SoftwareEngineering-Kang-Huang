@@ -61,7 +61,7 @@ public class CommandExcutor {
 		}
 	}
 	
-	public static void moveCommand() {
+	public void moveCommand(Points points) {
 		
 	}
 	

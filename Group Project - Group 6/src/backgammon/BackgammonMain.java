@@ -30,7 +30,8 @@ public class BackgammonMain {
 						player_name[player_sequence], roll_result[0], roll_result[1], player_name[player_sequence],
 						roll_result[0], roll_result[1], roll_result[2], roll_result[3]);
 			}
-			System.out.println("Select a point and move your checkers from that point (Enter the point number)");
+			
+			command_excutor.moveCommand(points);
 			
 			
 			
