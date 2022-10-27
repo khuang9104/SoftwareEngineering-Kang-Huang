@@ -23,3 +23,22 @@ Oct.27.2022 Kang:<br>
 Basic input and output components added and tested, 'quit' command works well.
 
 
+### Sprint 2: Game
+#### 1. A feature whereby when the game starts, the program rolls one die for each player to determine which player goes first. The result is used for the first move.
+
+   
+#### 2. A feature whereby the current player is indicated on the display.
+
+
+#### 3. A feature that displays the pip number of every point on the board. The pip numbers should change depending on which player’s turn it is.
+
+
+#### 4. A feature which lists all legal moves after the dice roll and allows the user to enter a letter code for the desired move. The board should be updated to reflect the move selected. All hits and bear off should be applied. All rules of backgammon should be considered.
+
+#### 5. A “pip” command which reports the pip count for both players.
+
+#### 6. A “hint” command which lists all allowed commands. The list should exclude the commands for testing.
+
+#### 7. A feature whereby the syntax of the commands entered are checked. An appropriate error message is generated if the command is invalid.
+
+#### 8. A feature that detects when the game is over and announces the winner of a game.
