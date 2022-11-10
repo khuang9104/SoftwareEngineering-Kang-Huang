@@ -5,28 +5,26 @@ import java.util.Stack;
 
 public class Points {
 	
-	private Checker checker_red = new Checker("Red");
-	private Checker checker_white = new Checker("Black");
     private ArrayList<Stack<String>> points = new ArrayList<Stack<String>>();
     // Using an ArrayList to store multiple stacks, each stack stand for a point(Total 24 points)
 
 	public Points() {
-		for (int i = 0; i < 24; i++) {
+		for (int i = 0; i < 26; i++) {
 			points.add(new Stack<String>());
 		}
 		initialPoints();
 	}
 	// Constructor
 
-	public void pushPoints(int pointsNum, String checkercolor) {
-		points.get(pointsNum-1).push(checkercolor);
+	public void pushPoints(int pointsNum, String checker_color) {
+		points.get(pointsNum).push(checker_color);
 	}
 	// Method 1: push a checker into a specific point 
 
 	public boolean popPoints(int pointsNum) {
 		boolean flag = false;
-		if (points.get(pointsNum-1).isEmpty() == false) {
-			points.get(pointsNum-1).pop();
+		if (points.get(pointsNum).isEmpty() == false) {
+			points.get(pointsNum).pop();
 			flag = true;
 		}
 		return flag;
@@ -35,17 +33,17 @@ public class Points {
 
 	public String peekPoints(int pointsNum) {
 		String result = "empty";
-		if(points.get(pointsNum-1).isEmpty() == false) {
-			result = points.get(pointsNum-1).peek();
+		if(points.get(pointsNum).isEmpty() == false) {
+			result = points.get(pointsNum).peek();
 		}
 		return result;
 	}
 	// Method 3: peek a checker from a specific point. Return the color of check in the top of specific point(stack). 
 	
-	public int size(int pointsNum) {
+	public int getSize(int pointsNum) {
 		int result = 0;
-		if(points.get(pointsNum-1).isEmpty() == false) {
-			result = points.get(pointsNum-1).size();
+		if(points.get(pointsNum).isEmpty() == false) {
+			result = points.get(pointsNum).size();
 		}
 		return result;
 	}
@@ -53,24 +51,18 @@ public class Points {
 	
 	public void initialPoints() {
 		for (int i = 0; i < 2; i++) { 
-			points.get(1-1).push(checker_red.getCheckerColor());
+			points.get(1).push("Red");
+			points.get(24).push("Black");
 		}
 		for (int i = 0; i < 3; i++) { 
-			points.get(8-1).push(checker_white.getCheckerColor());
+			points.get(8).push("Black");
+			points.get(17).push("Red");
 		}
 		for (int i = 0; i < 5; i++) { 
-			points.get(12-1).push(checker_red.getCheckerColor());
-			points.get(19-1).push(checker_red.getCheckerColor());
-		}
-		for (int i = 0; i < 5; i++) { 
-			points.get(6-1).push(checker_white.getCheckerColor());
-			points.get(13-1).push(checker_white.getCheckerColor());
-		}
-		for (int i = 0; i < 3; i++) { 
-			points.get(17-1).push(checker_red.getCheckerColor());
-		}
-		for (int i = 0; i < 2; i++) { 
-			points.get(24-1).push(checker_white.getCheckerColor());
+			points.get(6).push("Black");
+			points.get(13).push("Black");
+			points.get(12).push("Red");
+			points.get(19).push("Red");
 		}
 	}
 	// Method 5: initial the points, when game start.
