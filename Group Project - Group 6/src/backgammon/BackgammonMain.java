@@ -11,14 +11,12 @@ public class BackgammonMain {
 	private static ArrayList<Integer> roll_result = new ArrayList<Integer>();
 	private static int player_sequence = 0;
 	private static boolean end_flag = false;
-	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 		gameInitial();
 		while (end_flag == false) {
-			gameController.rollCommand(player_name[player_sequence]);
+			gameController.rollCommand(player_sequence);
 			gameController.moveCommand(player_sequence);
 
 			player_sequence++;
@@ -30,7 +28,7 @@ public class BackgammonMain {
 
 	public static void gameInitial() {
 		setNames();
-		gameController.printGameboard();
+		GameController.printGameboard();
 		System.out.printf("%s chose Black, %s chose Red.\n", player_name[0], player_name[1]);
 		System.out.println("Game Start!");
 		System.out.println("Now, each player throws a dice to determines who go first.");
@@ -39,11 +37,19 @@ public class BackgammonMain {
 
 	public static void setNames() {
 		boolean flag = false;
+		String input;
+		int hint_case = 1;
 		while (flag == false) {
 			System.out.println("Please input the name of player 1 (Black).");
-			player_name[0] = scanner.nextLine();
-			if (player_name[0] != "") {
+			input = scanner.nextLine();
+			if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("hint")) {
+				GameController.menuCommand(input, hint_case);
+				System.out.println("You can not use system command like 'quit', 'pip' or 'hint' as your name");
+			} else if (!input.equals("") && !input.equals("pip")) {
+				player_name[0] = input;
 				flag = true;
+			} else if (input.equals("pip")) {
+				System.out.println("You can not use system command like 'quit', 'pip' or 'hint' as your name");
 			}
 		}
 		System.out.println(player_name[0] + " chooses Black.");
@@ -51,9 +57,15 @@ public class BackgammonMain {
 		flag = false;
 		while (flag == false) {
 			System.out.println("Please input the name of player 2 (Red).");
-			player_name[1] = scanner.nextLine();
-			if (player_name[1] != "") {
+			input = scanner.nextLine();
+			if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("hint")) {
+				GameController.menuCommand(input, hint_case);
+				System.out.println("You can not use system command like 'quit', 'pip' or 'hint' as your name");
+			} else if (!input.equals("") && !input.equals("pip")) {
+				player_name[1] = input;
 				flag = true;
+			} else if (input.equals("pip")) {
+				System.out.println("You can not use system command like 'quit', 'pip' or 'hint' as your name");
 			}
 		}
 		System.out.println(player_name[1] + " chooses Red.");
@@ -86,5 +98,4 @@ public class BackgammonMain {
 			}
 		}
 	}
-
 }

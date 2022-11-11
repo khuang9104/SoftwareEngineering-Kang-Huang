@@ -1,12 +1,12 @@
 package backgammon;
 
+import java.util.ArrayList;
+
 public class Gameboard {
 
 	private String[] point_occupy = new String[26];
 	private String[][] point_show = new String[26][5];
 	private String[] player_name = new String[2];
-	private int checkers_tray_red = 0;
-	private int checkers_tray_black = 0;
 	private int[] bearoff_flag = new int[2];
 	private String bearoff_indicator_red;
 	private String bearoff_indicator_black;
@@ -16,9 +16,10 @@ public class Gameboard {
 	}
 	// Constructor
 
-	public void printGameboard(Points points) {
+	public void printGameboard(Points points, ArrayList<String> bearoff_counter_red,
+			ArrayList<String> bearoff_counter_black) {
 
-		updateGameboard(points);
+		updateGameboard(points, bearoff_counter_red, bearoff_counter_black);
 
 		System.out.println(
 				"*********************************************************************************************");
@@ -91,11 +92,12 @@ public class Gameboard {
 		System.out.println("Black: " + player_name[0]);
 		System.out.println(
 				"*********************************************************************************************");
-		System.out.println("Enter 'quit' to quit the game");
+		System.out.println("Enter 'hint' to get more info.");
 		// Method 1: UI print
 	}
 
-	public void updateGameboard(Points points) {
+	public void updateGameboard(Points points, ArrayList<String> bearoff_counter_red,
+			ArrayList<String> bearoff_counter_black) {
 		point_occupy[0] = " Red ";
 		point_occupy[25] = "Black";
 		for (int i = 1; i < 25; i++) {
@@ -142,12 +144,12 @@ public class Gameboard {
 		if (bearoff_flag[0] == 0) {
 			bearoff_indicator_black = "Not available yet";
 		} else {
-			bearoff_indicator_black = String.valueOf(checkers_tray_black);
+			bearoff_indicator_black = String.valueOf(bearoff_counter_black.size());
 		}
 		if (bearoff_flag[1] == 0) {
 			bearoff_indicator_red = "Not available yet";
 		} else {
-			bearoff_indicator_red = String.valueOf(checkers_tray_red);
+			bearoff_indicator_red = String.valueOf(bearoff_counter_red.size());
 		}
 	}
 	// Method 2: use this to update the whole game board.
@@ -167,7 +169,7 @@ public class Gameboard {
 				existFlag = true;
 			}
 		}
-		if (existFlag == false && points.getSize(0) == 0) {
+		if (existFlag == false && points.getSize(25) == 0) {
 			bearoff_flag[0] = 1;
 		} else {
 			bearoff_flag[0] = 0;
@@ -179,7 +181,7 @@ public class Gameboard {
 				existFlag = true;
 			}
 		}
-		if (existFlag == false && points.getSize(25) == 0) {
+		if (existFlag == false && points.getSize(0) == 0) {
 			bearoff_flag[1] = 1;
 		} else {
 			bearoff_flag[1] = 0;
