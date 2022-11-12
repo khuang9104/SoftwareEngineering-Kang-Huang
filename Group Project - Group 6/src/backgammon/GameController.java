@@ -28,7 +28,7 @@ public class GameController {
 		boolean flag = false;
 		String input;
 		hint_case = 2;
-		
+
 		System.out.printf("It is %s's turn, please enter 'roll' to roll your dice.\n", player_name[player_sequence]);
 		while (flag == false) {
 			flag = false;
@@ -46,7 +46,8 @@ public class GameController {
 							roll_result.get(3));
 				}
 				flag = true;
-			} else if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("pip") || input.equalsIgnoreCase("hint")) {
+			} else if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("pip")
+					|| input.equalsIgnoreCase("hint")) {
 				menuCommand(input, hint_case);
 				System.out.printf("It is %s's turn, please enter 'roll' to roll your dice.\n",
 						player_name[player_sequence]);
@@ -62,20 +63,21 @@ public class GameController {
 			System.out.println("Quit the game successfully");
 			System.exit(0);
 		} else if (input.equalsIgnoreCase("hint")) {
-			switch(hint_case) {
-			case 1: 
+			switch (hint_case) {
+			case 1:
 				System.out.println("Hint 1: Enter 'quit' to quit the game, 'pip' function is not available now.");
 				System.out.println("Hint 2: Please enter a name to join the game.");
 				break;
-			case 2: 
+			case 2:
 				printGameboard();
 				System.out.println("Hint 1: Enter 'quit' to quit the game, 'pip' to check the pips");
 				System.out.println("Hint 2: Please enter 'roll' to roll your dice.");
 				break;
-			case 3: 
+			case 3:
 				printGameboard();
 				System.out.println("Hint 1: Enter 'quit' to quit the game, 'pip' to check the pips");
-				System.out.println("Hint 2: Please enter a letter to move your checker. (i.e. enter 'A' to select option A.)");
+				System.out.println(
+						"Hint 2: Please enter a letter to move your checker. (i.e. enter 'A' to select option A.)");
 				break;
 			case 4:
 				printGameboard();
@@ -85,8 +87,7 @@ public class GameController {
 			}
 		} else if (input.equalsIgnoreCase("pip")) {
 			printGameboard();
-			pipsCalculator.updatePips(points);
-			pipsCalculator.displayPips();
+			pipsCalculator.displayPips(points);
 		}
 	}
 
@@ -96,20 +97,21 @@ public class GameController {
 		bearoff_flag = gameboard.bearOffCheck(points);
 
 		while (roll_result.size() > 0 && possibleMove(player_sequence) == true) {
-			printAvailableDicePoint();
+			printAvailableDicePoint(player_sequence);
 			selectionInput(player_sequence);
 		}
 		if (roll_result.size() > 0 && possibleMove(player_sequence) == false) {
 			flag = false;
 			String input;
 			hint_case = 4;
-			printAvailableDicePoint();
+			printAvailableDicePoint(player_sequence);
 			while (flag == false) {
 				System.out.println("There is nothing you can do, enter 'p' to pass your turn");
 				input = scanner.nextLine();
 				if (input.equalsIgnoreCase("p")) {
 					flag = true;
-				} else if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("pip") || input.equalsIgnoreCase("hint")) {
+				} else if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("pip")
+						|| input.equalsIgnoreCase("hint")) {
 					menuCommand(input, hint_case);
 				} else {
 					System.out.println("Input error, there is nothing you can do, enter 'p' to pass your turn");
@@ -132,8 +134,8 @@ public class GameController {
 			input = scanner.nextLine();
 			if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("pip") || input.equalsIgnoreCase("hint")) {
 				menuCommand(input, hint_case);
-				System.out.printf("It is %s's turn.\n", player_name[player_sequence]);
-				printAvailableDicePoint();
+
+				printAvailableDicePoint(player_sequence);
 				availableOptionPrint(player_sequence);
 				continue;
 			} else if (available_options.contains(input.toUpperCase())) {
@@ -150,6 +152,10 @@ public class GameController {
 			} else {
 				System.out.println("Entry error, please enter a correct letter or enter 'hint' for hints");
 			}
+		}
+		if (pipsCalculator.gameOverCheck(points)) {
+			System.out.printf("%s won the game!!!", player_name[player_sequence]);
+			System.exit(0);
 		}
 	}
 
@@ -172,8 +178,8 @@ public class GameController {
 			} else if (player_sequence == 0 && (available_points.get(i) - available_dice_points.get(i) <= 0)) {
 				System.out.printf(
 						String.valueOf((char) (97 + i)).toUpperCase()
-								+ "): Points: %d, move %d steps foward and bear-off!\n",
-						available_points.get(i), available_points.get(i));
+								+ "): Points: %d, consume dice point %d to bear-off!\n",
+						available_points.get(i), available_dice_points.get(i));
 				available_options.add(String.valueOf((char) (97 + i)).toUpperCase());
 			}
 
@@ -188,11 +194,11 @@ public class GameController {
 						String.valueOf((char) (97 + i)).toUpperCase() + "): Points: %d, move %d steps foward.\n",
 						available_points.get(i), available_dice_points.get(i));
 				available_options.add(String.valueOf((char) (97 + i)).toUpperCase());
-			} else if (player_sequence == 1 && (available_points.get(i) + available_dice_points.get(i) < 25)) {
+			} else if (player_sequence == 1 && (available_points.get(i) + available_dice_points.get(i) >= 25)) {
 				System.out.printf(
 						String.valueOf((char) (97 + i)).toUpperCase()
-								+ "): Points: %d, move %d steps foward and bear-off!\n",
-						available_points.get(i), 24 - available_points.get(i));
+								+ "): Points: %d, consume dice point %d to bear-off!\n",
+						available_points.get(i), available_dice_points.get(i));
 				available_options.add(String.valueOf((char) (97 + i)).toUpperCase());
 			}
 		}
@@ -209,12 +215,10 @@ public class GameController {
 
 	public static void moveChecker(int player_sequence, int target_point, int moving_distance) {
 		hit_detect = false;
-
-		moveLegalityCheck(player_sequence);
 		if (available_points.contains(target_point) && player_sequence == 0) {
 			if (target_point - moving_distance > 0) {
 				if (points.peekPoints(target_point - moving_distance) == "Red") {
-					points.pushPoints(0, points.peekPoints(target_point + moving_distance));
+					points.pushPoints(0, points.peekPoints(target_point - moving_distance));
 					points.popPoints(target_point - moving_distance);
 					hit_detect = true;
 					points.pushPoints((target_point - moving_distance), points.peekPoints(target_point));
@@ -252,14 +256,21 @@ public class GameController {
 
 	public static void moveLegalityCheck(int player_sequence) {
 		String color;
+		int size;
 
 		available_points.clear();
 		available_dice_points.clear();
 		bearoff_flag = gameboard.bearOffCheck(points);
 
+		if (roll_result.size() >= 2 && (roll_result.get(0) == roll_result.get(1))) {
+			size = 1;
+		} else {
+			size = roll_result.size();
+		}
+
 		if (player_sequence == 0) {
 			color = "Black";
-			for (int j = 0; j < roll_result.size(); j++) {
+			for (int j = 0; j < size; j++) {
 				for (int i = 0; i < 26; i++) {
 					if ((points.peekPoints(i) == color) && (i - roll_result.get(j) > 0)
 							&& ((points.peekPoints(i - roll_result.get(j)) == color)
@@ -277,7 +288,7 @@ public class GameController {
 						if (points.peekPoints(i) == color && (i - roll_result.get(j) < 0)) {
 							available_points.add(i);
 							available_dice_points.add(roll_result.get(j));
-							continue;
+							break;
 						}
 					}
 				}
@@ -286,7 +297,7 @@ public class GameController {
 
 		if (player_sequence == 1) {
 			color = "Red";
-			for (int j = 0; j < roll_result.size(); j++) {
+			for (int j = 0; j < size; j++) {
 				for (int i = 0; i < 26; i++) {
 					if ((points.peekPoints(i) == color) && (i + roll_result.get(j) < 25)
 							&& ((points.peekPoints(i + roll_result.get(j)) == color)
@@ -294,7 +305,7 @@ public class GameController {
 						available_points.add(i);
 						available_dice_points.add(roll_result.get(j));
 					}
-					if (bearoff_flag[1] == 1 && (points.peekPoints(i) == color) && (i - roll_result.get(j) == 0)) {
+					if (bearoff_flag[1] == 1 && (points.peekPoints(i) == color) && (i + roll_result.get(j) == 25)) {
 						available_points.add(i);
 						available_dice_points.add(roll_result.get(j));
 					}
@@ -304,7 +315,7 @@ public class GameController {
 						if (points.peekPoints(i) == color && (i + roll_result.get(j) > 25)) {
 							available_points.add(i);
 							available_dice_points.add(roll_result.get(j));
-							continue;
+							break;
 						}
 					}
 				}
@@ -312,10 +323,12 @@ public class GameController {
 		}
 
 		if (available_points.contains(25) || available_points.contains(0)) {
-			for (int i = 0; i < available_points.size(); i++) {
-				if (available_points.get(i) != 25 || available_points.get(i) != 0) {
+			for (int i = 0; i < available_points.size();) {
+				if (available_points.get(i) != 25 && available_points.get(i) != 0) {
 					available_points.remove(i);
 					available_dice_points.remove(i);
+				} else {
+					i++;
 				}
 			}
 		}
@@ -339,11 +352,12 @@ public class GameController {
 		while (flag == false) {
 			flag = false;
 			input = scanner.nextLine();
-			if (input.equals("roll")) {
+			if (input.equalsIgnoreCase("roll")) {
 				rollDice();
 				printGameboard();
 				flag = true;
-			} else if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("pip") || input.equalsIgnoreCase("hint")) {
+			} else if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("pip")
+					|| input.equalsIgnoreCase("hint")) {
 				menuCommand(input, hint_case);
 				System.out.printf("It is %s's turn, please enter 'roll' to roll your dice.\n", player_name);
 			} else {
@@ -362,11 +376,12 @@ public class GameController {
 		gameboard.setNames(player_name);
 	}
 
-	public static void printAvailableDicePoint() {
+	public static void printAvailableDicePoint(int player_sequence) {
+		System.out.printf("It is %s's turn.\n", player_name[player_sequence]);
 		System.out.print("Available dice point: ");
 		for (int i = 0; i < roll_result.size(); i++) {
 			System.out.print(roll_result.get(i) + " ");
 		}
-		System.out.println(".");
+		System.out.println("");
 	}
 }

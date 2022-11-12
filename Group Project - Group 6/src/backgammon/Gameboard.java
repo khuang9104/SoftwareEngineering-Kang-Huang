@@ -164,24 +164,24 @@ public class Gameboard {
 		boolean existFlag;
 
 		existFlag = false;
-		for (int i = 0; i < 18; i++) {
-			if (points.peekPoints(i + 1) == "Black") {
+		for (int i = 7; i < 26; i++) {
+			if (points.peekPoints(i) == "Black") {
 				existFlag = true;
 			}
 		}
-		if (existFlag == false && points.getSize(25) == 0) {
+		if (existFlag == false) {
 			bearoff_flag[0] = 1;
 		} else {
 			bearoff_flag[0] = 0;
 		}
 
 		existFlag = false;
-		for (int i = 6; i < 24; i++) {
-			if (points.peekPoints(i + 1) == "Red") {
+		for (int i = 0; i < 19; i++) {
+			if (points.peekPoints(i) == "Red") {
 				existFlag = true;
 			}
 		}
-		if (existFlag == false && points.getSize(0) == 0) {
+		if (existFlag == false) {
 			bearoff_flag[1] = 1;
 		} else {
 			bearoff_flag[1] = 0;
