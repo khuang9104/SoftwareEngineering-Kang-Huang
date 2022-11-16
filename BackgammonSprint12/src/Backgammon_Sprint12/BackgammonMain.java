@@ -1,7 +1,7 @@
 package Backgammon_Sprint12;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+//class
 public class BackgammonMain {
 
 	private static GameController gameController = new GameController();
