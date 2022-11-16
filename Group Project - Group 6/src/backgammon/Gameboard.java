@@ -14,7 +14,6 @@ public class Gameboard {
 
 	public Gameboard() {
 	}
-	// Constructor
 
 	public void printGameboard(Points points, ArrayList<String> bearoff_counter_red,
 			ArrayList<String> bearoff_counter_black) {
@@ -93,13 +92,13 @@ public class Gameboard {
 		System.out.println(
 				"*********************************************************************************************");
 		System.out.println("Enter 'hint' to get more info.");
-		// Method 1: UI print
+		// Method: UI print
 	}
 
 	public void updateGameboard(Points points, ArrayList<String> bearoff_counter_red,
 			ArrayList<String> bearoff_counter_black) {
-		point_occupy[0] = " Red ";
-		point_occupy[25] = "Black";
+		point_occupy[0] = " Red ";         // Red Bar
+		point_occupy[25] = "Black";        // Black Bar
 		for (int i = 1; i < 25; i++) {
 			if (points.getSize(i) == 0) {
 				point_occupy[i] = "     ";
@@ -109,11 +108,12 @@ public class Gameboard {
 				}
 				if (points.peekPoints(i) == "Black") {
 					point_occupy[i] = "Black";
-					// point_occupy[i] = " " + points.peekPoints(i).charAt(0) + "(" +
-					// String.valueOf(points.size(i) + ")");
 				}
 			}
 		}
+		// Updated the occupation of all points
+		
+		
 		for (int i = 0; i < 26; i++) {
 			for (int j = 0; j < 5; j++) {
 				if (points.getSize(i) >= 0 && points.getSize(i) <= 5) {
@@ -139,6 +139,7 @@ public class Gameboard {
 				}
 			}
 		}
+		// Show the checkers in each points, use ‘@’ stand for a checker.
 
 		this.bearoff_flag = bearOffCheck(points);
 		if (bearoff_flag[0] == 0) {
@@ -152,13 +153,14 @@ public class Gameboard {
 			bearoff_indicator_red = String.valueOf(bearoff_counter_red.size());
 		}
 	}
-	// Method 2: use this to update the whole game board.
+	// Update the bear-off status, if it is ready to bear-off, show the bear-off number. 
+	// Method: use this to update the whole game board.
 
 	public void setNames(String[] names) {
 		this.player_name[0] = names[0];
 		this.player_name[1] = names[1];
 	}
-	// Method 3: set players' namer
+	// Method: set players' namer
 
 	public int[] bearOffCheck(Points points) {
 		boolean existFlag;
@@ -170,10 +172,11 @@ public class Gameboard {
 			}
 		}
 		if (existFlag == false) {
-			bearoff_flag[0] = 1;
+			bearoff_flag[0] = 1;     // bearoff_flag[0] for Black
 		} else {
 			bearoff_flag[0] = 0;
 		}
+		// if there is no checker outside the homeboard of Black(Include Bar), Black are allow to bear-off.
 
 		existFlag = false;
 		for (int i = 0; i < 19; i++) {
@@ -182,10 +185,12 @@ public class Gameboard {
 			}
 		}
 		if (existFlag == false) {
-			bearoff_flag[1] = 1;
+			bearoff_flag[1] = 1;    // bearoff_flag[1] for Red
 		} else {
 			bearoff_flag[1] = 0;
 		}
+		// if there is no checker outside the homeboard of Red(Include Bar), Red are allow to bear-off.
 		return bearoff_flag;
 	}
+	// Method: Check whether is ready for bear-off or not.
 }

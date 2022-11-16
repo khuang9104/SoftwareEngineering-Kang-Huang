@@ -15,7 +15,7 @@ public class Points {
 		}
 		initialPoints();
 	}
-	// Constructor
+	// Construct the points
 
 	public void pushPoints(int pointsNum, String checker_color) {
 		points.get(pointsNum).push(checker_color);
@@ -30,8 +30,8 @@ public class Points {
 		}
 		return flag;
 	}
-	// Method 2: pop a checker from a specific point. It will return a 'False' if
-	// the point is empty before pop.
+	// Method: pop a checker from a specific point. 
+	// It will return a 'False' if the point is empty before pop.
 
 	public String peekPoints(int pointsNum) {
 		String result = "empty";
@@ -40,8 +40,8 @@ public class Points {
 		}
 		return result;
 	}
-	// Method 3: peek a checker from a specific point. Return the color of check in
-	// the top of specific point(stack).
+	// Method: peek a checker from a specific point. 
+	// Return the colour of check in the top of specific point(stack).
 
 	public int getSize(int pointsNum) {
 		int result = 0;
@@ -50,7 +50,7 @@ public class Points {
 		}
 		return result;
 	}
-	// Method 4: check how many checker in specific point. Return the result.
+	// Method: check how many checkers in specific point. Return the result.
 
 	public void initialPoints() {
 		for (int i = 0; i < 2; i++) {
@@ -68,13 +68,14 @@ public class Points {
 			points.get(19).push("Red");
 		}
 	}
-	// Method 5: initial the points, when game start.
+	// Method: initial the points, when game start.
 
 	public void clearPoints() {
 		for (int i = 0; i < 26; i++) {
 			points.get(i).clear();
 		}
 	}
+	// Method: Clear all checkers in all points.
 
 	public Points clonePoints(Points point) {
 		Points points_clone = new Points();
@@ -87,5 +88,6 @@ public class Points {
 		return points_clone;
 
 	}
+	// Method: Return a clone of input points.
 
 }

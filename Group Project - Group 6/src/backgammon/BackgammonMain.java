@@ -11,6 +11,7 @@ public class BackgammonMain {
 	private static ArrayList<Integer> roll_result = new ArrayList<Integer>();
 	private static int player_sequence = 0;
 	private static boolean end_flag = false;
+	// Attributes
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -25,6 +26,7 @@ public class BackgammonMain {
 			}
 		}
 	}
+	// Run the game (Main)
 
 	public static void gameInitial() {
 		setNames();
@@ -34,6 +36,7 @@ public class BackgammonMain {
 		System.out.println("Now, each player throws a dice to determines who go first.");
 		setPlaySequence();
 	}
+	// Method: initial the game, includes set name and play sequence determine. 
 
 	public static void setNames() {
 		boolean flag = false;
@@ -49,6 +52,7 @@ public class BackgammonMain {
 				player_name[0] = input;
 				flag = true;
 			} else if (input.equals("pip")) {
+				System.out.println("'pip' function is not available now.");
 				System.out.println("You can not use system command like 'quit', 'pip' or 'hint' as your name");
 			}
 		}
@@ -65,12 +69,15 @@ public class BackgammonMain {
 				player_name[1] = input;
 				flag = true;
 			} else if (input.equals("pip")) {
+				System.out.println("'pip' function is not available now.");
 				System.out.println("You can not use system command like 'quit', 'pip' or 'hint' as your name");
 			}
 		}
 		System.out.println(player_name[1] + " chooses Red.");
-		gameController.setNames(player_name);
+		gameController.setNames(player_name);                    // Pass the names to GameController.
 	}
+	
+	// Method: set name.
 
 	public static void setPlaySequence() {
 		boolean flag = false;
@@ -98,4 +105,5 @@ public class BackgammonMain {
 			}
 		}
 	}
+	// Method: set play sequence.
 }

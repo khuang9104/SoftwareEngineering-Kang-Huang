@@ -20,6 +20,7 @@ public class GameController {
 	private static Gameboard gameboard = new Gameboard();
 	private static PipsCalculator pipsCalculator = new PipsCalculator();
 	private static Scanner scanner = new Scanner(System.in);
+	// Attributes
 
 	public GameController() {
 	}
@@ -56,6 +57,7 @@ public class GameController {
 			}
 		}
 	}
+	// Method: Roll twice dice and print results.
 
 	public static void menuCommand(String input, int hint_case) {
 		if (input.equalsIgnoreCase("quit")) {
@@ -90,6 +92,7 @@ public class GameController {
 			pipsCalculator.displayPips(points);
 		}
 	}
+	// Method: Menu method. Based on different input, execute different commands.
 
 	public void moveCommand(int player_sequence) {
 		boolean flag = false;
@@ -100,6 +103,8 @@ public class GameController {
 			printAvailableDicePoint(player_sequence);
 			selectionInput(player_sequence);
 		}
+		// If there exist possible legal movement, print available dice point and allow user to select option to move.
+		
 		if (roll_result.size() > 0 && possibleMove(player_sequence) == false) {
 			flag = false;
 			String input;
@@ -118,7 +123,9 @@ public class GameController {
 				}
 			}
 		}
+		// If there is no possible legal movement, player needs to enter 'p' to pass their turn.
 	}
+	// Method: Move command framework.
 
 	public void selectionInput(int player_sequence) {
 		boolean flag = false;
@@ -126,25 +133,25 @@ public class GameController {
 		int option_index;
 		hint_case = 3;
 
-		moveLegalityCheck(player_sequence);
-		availableOptionPrint(player_sequence);
+		moveLegalityCheck(player_sequence);      // Check all possible legal movement and record them in available_points and available_dice_points.
+		availableOptionPrint(player_sequence);   // Print all available movement option.
 
 		while (flag == false) {
 			flag = false;
 			input = scanner.nextLine();
 			if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("pip") || input.equalsIgnoreCase("hint")) {
 				menuCommand(input, hint_case);
-
 				printAvailableDicePoint(player_sequence);
 				availableOptionPrint(player_sequence);
 				continue;
+			// Go to menu and reprint info.
 			} else if (available_options.contains(input.toUpperCase())) {
-				option_index = available_options.indexOf(input.toUpperCase());
+				option_index = available_options.indexOf(input.toUpperCase());   // Get the index of option in available_options and available_dice_points.
 				moveChecker(player_sequence, available_points.get(option_index),
-						available_dice_points.get(option_index));
+						available_dice_points.get(option_index));                // Execute movement.
 				printGameboard();
-				roll_result.remove(roll_result.indexOf(available_dice_points.get(option_index)));
-				if (hit_detect == true) {
+				roll_result.remove(roll_result.indexOf(available_dice_points.get(option_index)));  // Remove the consumed dice point.
+				if (hit_detect == true) {                                        // Hit detect was checked when execute movement(in method: moveChecker).
 					System.out.println("Hit detected! Please check the bar.");
 				}
 				System.out.println("Checker move completed!");
@@ -157,7 +164,9 @@ public class GameController {
 			System.out.printf("%s won the game!!!", player_name[player_sequence]);
 			System.exit(0);
 		}
+		// Game over check.
 	}
+	// Method: Provide available movement option with player, allow play select one to execute.
 
 	public static void availableOptionPrint(int player_sequence) {
 		available_options.clear();
@@ -170,11 +179,13 @@ public class GameController {
 								+ "): You have to move checker from bar first, move %d steps foward from bar.\n",
 						available_dice_points.get(i));
 				available_options.add(String.valueOf((char) (97 + i)).toUpperCase());
+			// Option for Bar (Bar first).
 			} else if (player_sequence == 0 && (available_points.get(i) - available_dice_points.get(i) > 0)) {
 				System.out.printf(
 						String.valueOf((char) (97 + i)).toUpperCase() + "): Points: %d, move %d steps foward.\n",
 						available_points.get(i), available_dice_points.get(i));
 				available_options.add(String.valueOf((char) (97 + i)).toUpperCase());
+			// Option for normal movement.
 			} else if (player_sequence == 0 && (available_points.get(i) - available_dice_points.get(i) <= 0)) {
 				System.out.printf(
 						String.valueOf((char) (97 + i)).toUpperCase()
@@ -182,6 +193,8 @@ public class GameController {
 						available_points.get(i), available_dice_points.get(i));
 				available_options.add(String.valueOf((char) (97 + i)).toUpperCase());
 			}
+			// Option for bear-off movement.
+			// Options for Black Player
 
 			if (player_sequence == 1 && (available_points.get(i) == 0)) {
 				System.out.printf(
@@ -189,11 +202,13 @@ public class GameController {
 								+ "): You have to move checker from bar first, move %d steps foward from bar.\n",
 						available_dice_points.get(i));
 				available_options.add(String.valueOf((char) (97 + i)).toUpperCase());
+			// Option for Bar (Bar first).
 			} else if (player_sequence == 1 && (available_points.get(i) + available_dice_points.get(i) < 25)) {
 				System.out.printf(
 						String.valueOf((char) (97 + i)).toUpperCase() + "): Points: %d, move %d steps foward.\n",
 						available_points.get(i), available_dice_points.get(i));
 				available_options.add(String.valueOf((char) (97 + i)).toUpperCase());
+			// Option for normal movement.
 			} else if (player_sequence == 1 && (available_points.get(i) + available_dice_points.get(i) >= 25)) {
 				System.out.printf(
 						String.valueOf((char) (97 + i)).toUpperCase()
@@ -201,8 +216,11 @@ public class GameController {
 						available_points.get(i), available_dice_points.get(i));
 				available_options.add(String.valueOf((char) (97 + i)).toUpperCase());
 			}
+			// Option for bear-off movement.
+			// Options for Red Player
 		}
 	}
+	// Method: Print available movement option.
 
 	public static boolean possibleMove(int player_sequence) {
 		boolean flag = false;
@@ -212,6 +230,7 @@ public class GameController {
 		}
 		return flag;
 	}
+	// Method: Check whether there is any available legal movement.
 
 	public static void moveChecker(int player_sequence, int target_point, int moving_distance) {
 		hit_detect = false;
@@ -223,16 +242,18 @@ public class GameController {
 					hit_detect = true;
 					points.pushPoints((target_point - moving_distance), points.peekPoints(target_point));
 					points.popPoints(target_point);
+					// Move and hit.
 				} else {
 					points.pushPoints((target_point - moving_distance), points.peekPoints(target_point));
 					points.popPoints(target_point);
-				}
+				}   // Normal move.
 			}
 			if (target_point - moving_distance <= 0) {
 				points.popPoints(target_point);
 				bearoff_counter_black.add("Black");
-			}
+			}   // Bear-off
 		}
+		// Black player
 
 		if (available_points.contains(target_point) && player_sequence == 1) {
 			if (target_point + moving_distance < 25) {
@@ -242,16 +263,18 @@ public class GameController {
 					hit_detect = true;
 					points.pushPoints((target_point + moving_distance), points.peekPoints(target_point));
 					points.popPoints(target_point);
+					// Move and hit.
 				} else {
 					points.pushPoints((target_point + moving_distance), points.peekPoints(target_point));
 					points.popPoints(target_point);
-				}
+				}   // Normal move.
 			}
 			if (target_point + moving_distance >= 25) {
 				points.popPoints(target_point);
 				bearoff_counter_red.add("Red");
-			}
+			}   // Bear-off
 		}
+		// Red player
 	}
 
 	public static void moveLegalityCheck(int player_sequence) {
@@ -260,13 +283,14 @@ public class GameController {
 
 		available_points.clear();
 		available_dice_points.clear();
-		bearoff_flag = gameboard.bearOffCheck(points);
+		bearoff_flag = gameboard.bearOffCheck(points);    // Updated the bear-off status.
 
 		if (roll_result.size() >= 2 && (roll_result.get(0) == roll_result.get(1))) {
 			size = 1;
 		} else {
 			size = roll_result.size();
 		}
+		// if the roll results is the same, only get one legal movement option, avoid duplication of options.
 
 		if (player_sequence == 0) {
 			color = "Black";
@@ -277,11 +301,12 @@ public class GameController {
 									|| points.getSize(i - roll_result.get(j)) <= 1)) {
 						available_points.add(i);
 						available_dice_points.add(roll_result.get(j));
+						// Normal move.
 					}
 					if (bearoff_flag[0] == 1 && (points.peekPoints(i) == color) && (i - roll_result.get(j) == 0)) {
 						available_points.add(i);
 						available_dice_points.add(roll_result.get(j));
-					}
+					}   // Bear-off normal move.
 				}
 				if (bearoff_flag[0] == 1 && available_points.size() == 0) {
 					for (int i = 6; i > 0; i--) {
@@ -292,8 +317,10 @@ public class GameController {
 						}
 					}
 				}
+				// Bear-off special move.
 			}
 		}
+		// Black player
 
 		if (player_sequence == 1) {
 			color = "Red";
@@ -304,11 +331,11 @@ public class GameController {
 									|| points.getSize(i + roll_result.get(j)) <= 1)) {
 						available_points.add(i);
 						available_dice_points.add(roll_result.get(j));
-					}
+					}   // Normal move.
 					if (bearoff_flag[1] == 1 && (points.peekPoints(i) == color) && (i + roll_result.get(j) == 25)) {
 						available_points.add(i);
 						available_dice_points.add(roll_result.get(j));
-					}
+					}   // Bear-off normal move.
 				}
 				if (bearoff_flag[0] == 1 && available_points.size() == 0) {
 					for (int i = 19; i < 25; i++) {
@@ -319,8 +346,10 @@ public class GameController {
 						}
 					}
 				}
+				// Bear-off special move.
 			}
 		}
+		// Red player
 
 		if (available_points.contains(25) || available_points.contains(0)) {
 			for (int i = 0; i < available_points.size();) {
@@ -332,6 +361,7 @@ public class GameController {
 				}
 			}
 		}
+		// Bar priority. Remove all other options, only bar option left.
 	}
 
 	public static void rollDice() {
@@ -343,6 +373,7 @@ public class GameController {
 			roll_result.add(roll_result.get(1));
 		}
 	}
+	// Method: roll the dice
 
 	public ArrayList<Integer> playSequenceRollCommand(String player_name) {
 		boolean flag = false;
@@ -366,15 +397,18 @@ public class GameController {
 		}
 		return roll_result;
 	}
+	// Method: roll one dice for play sequence determination.
 
 	public static void printGameboard() {
 		gameboard.printGameboard(points, bearoff_counter_red, bearoff_counter_black);
 	}
+	// Method: Print the game board.
 
 	public void setNames(String[] player_name) {
 		GameController.player_name = player_name;
 		gameboard.setNames(player_name);
 	}
+	// Method: Set name and pass the names to game board.
 
 	public static void printAvailableDicePoint(int player_sequence) {
 		System.out.printf("It is %s's turn.\n", player_name[player_sequence]);
@@ -384,4 +418,5 @@ public class GameController {
 		}
 		System.out.println("");
 	}
+	// Method: Print available dice point.
 }

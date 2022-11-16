@@ -2,7 +2,8 @@ package backgammon;
 
 public class PipsCalculator {
 
-	private static int[] pips = new int[2];
+	private static int[] pips = new int[2]; 
+	// pips[0] = Black pip, pips[1] = Red pip.
 
 	public PipsCalculator() {
 	}
@@ -21,11 +22,13 @@ public class PipsCalculator {
 			}
 		}
 	}
+	// Updated pip based on the checkers position (including checkers in Bar).
 
 	public void displayPips(Points points) {
 		updatePips(points);
 		System.out.printf("Red pips = %d, Black pips = %d\n", pips[1], pips[0]);
 	}
+	// Display the pip.
 	
 	public boolean gameOverCheck(Points points) {
 		boolean flag;
@@ -37,5 +40,6 @@ public class PipsCalculator {
 		}
 		return flag;
 	}
+	// when the pip of any player is equal to 0, that player won the game.
 
 }
