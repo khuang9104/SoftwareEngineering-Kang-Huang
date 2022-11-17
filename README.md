@@ -34,15 +34,29 @@ Feature added and tested, each player can roll a dice to determined who go first
 Oct.28.2022 Kang:<br>
 The feature was added and tested and the prompt will show whose turn it is.
 
-#### 3. A feature that displays the pip number of every point on the board. The pip numbers should change depending on which player’s turn it is.
+#### 3. A feature that displays the pip number of every point on the board. The pip numbers should change depending on which player’s turn it is. (Done. Checked on Nov.17.2022 by Kang)
+Nov.17.2022 Kang:<br>
+This feature was added.
 
+#### 4. A feature which lists all legal moves after the dice roll and allows the user to enter a letter code for the desired move. The board should be updated to reflect the move selected. All hits and bear off should be applied. All rules of backgammon should be considered. (Done. Checked on Nov.17.2022 by Kang)
+Nov.17.2022 Kang:<br>
+This feature was added.
+Following rules to be updated:<br>
+1.If either number can be played but not both, the player must play the larger one.  <br>
+2.In the case of doubles, when all four numbers cannot be played, the player must play as many numbers as he can.<br>
 
-#### 4. A feature which lists all legal moves after the dice roll and allows the user to enter a letter code for the desired move. The board should be updated to reflect the move selected. All hits and bear off should be applied. All rules of backgammon should be considered.
+#### 5. A “pip” command which reports the pip count for both players. (Done. Checked on Nov.17.2022 by Kang)
+Nov.17.2022 Kang:<br>
+This feature was added.
 
-#### 5. A “pip” command which reports the pip count for both players.
+#### 6. A “hint” command which lists all allowed commands. The list should exclude the commands for testing. (Done. Checked on Nov.17.2022 by Kang)
+Nov.17.2022 Kang:<br>
+This feature was added.
 
-#### 6. A “hint” command which lists all allowed commands. The list should exclude the commands for testing.
+#### 7. A feature whereby the syntax of the commands entered are checked. An appropriate error message is generated if the command is invalid. (Done. Checked on Nov.17.2022 by Kang)
+Nov.17.2022 Kang:<br>
+This feature was added.
 
-#### 7. A feature whereby the syntax of the commands entered are checked. An appropriate error message is generated if the command is invalid.
-
-#### 8. A feature that detects when the game is over and announces the winner of a game.
+#### 8. A feature that detects when the game is over and announces the winner of a game. (Done. Checked on Nov.17.2022 by Kang)
+Nov.17.2022 Kang:<br>
+This feature was added.
