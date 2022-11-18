@@ -43,7 +43,6 @@ Nov.17.2022 Kang:<br>
 This feature was added.
 Following rules to be updated:<br>
 1.If either number can be played but not both, the player must play the larger one.  <br>
-2.In the case of doubles, when all four numbers cannot be played, the player must play as many numbers as he can.<br>
 
 #### 5. A “pip” command which reports the pip count for both players. (Done on Nov.17.2022 by Kang)
 Nov.17.2022 Kang:<br>
