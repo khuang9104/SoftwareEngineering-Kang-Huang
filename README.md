@@ -1,8 +1,7 @@
-# Backgammon - Software Engineering Group Project
+# Backgammon - Software Engineering Project
 ### Course name: Software Engineering
 ### Course code: COMP41670
-### Group 6
-### Group member: Kang Huang(20211924),  
+### Student: Kang Huang(20211924)  
 <br>
 
 ### Sprint 1: Display & Rolls
