@@ -84,7 +84,7 @@ public class GameController {
 			}
 			// Other commands available.
 			else {
-				System.out.println("Entry error, please enter 'roll' to roll your dice or 'menu' for more info.");
+				System.out.println("Entry error, please enter 'roll' to roll your dice or 'hint' for more info.");
 			}
 			// Prompt for entry error.
 		}
@@ -590,7 +590,7 @@ public class GameController {
 			}
 			// Other commands available.
 			else {
-				System.out.println("Entry error, please enter 'roll' to roll your dice or 'menu' for more info.");
+				System.out.println("Entry error, please enter 'roll' to roll your dice or 'hint' for more info.");
 			}
 			// Prompt for entry error.
 		}
