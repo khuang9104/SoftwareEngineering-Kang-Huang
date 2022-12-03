@@ -1,0 +1,42 @@
+Kang
+pip
+hint
+Wenwei
+pip
+hint
+dice 3
+dice 3
+dice 4
+dice 6
+dice 1 3
+pip
+hint
+A
+a
+dice 2 1
+a
+a
+dice 1 1
+A
+a
+a
+A
+dice 3 3
+a
+a
+a
+a
+dice 3 4
+a
+a
+dice 4 5
+A
+a
+dice 5 5
+a
+a
+a
+a
+dice 4 5
+A
+a
