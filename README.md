@@ -2,7 +2,6 @@
 ### Course name: Software Engineering
 ### Course code: COMP41670
 ### Student: Kang Huang(20211924)  
-<br>
 
 ### Sprint 1: Display & Rolls
 #### 1. A feature whereby the Backgammon board is displayed with the Checkers in their initial positions.<br> (Done on Nov.10.2022 by Kang)
