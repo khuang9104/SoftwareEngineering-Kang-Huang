@@ -61,13 +61,13 @@ Nov.17.2022 Kang:<br>
 This feature was added.
 
 ### Sprint 3: Match
-#### 1. A “dice <int> <int>” command which cause the subsequent dice roll to equal the given numbers. (Done on Dec.03.2022 by Kang)
+#### 1. A “dice <int> <int>” command which cause the subsequent dice roll to equal the given numbers. (Done on Dec.03.2022)
 Dec.03.2022 Kang:<br>
 Feature added and tested.
-#### 2. A “test <filename>” command which performs the commands in the given text file. (Done on Dec.03.2022 by Kang)
+#### 2. A “test <filename>” command which performs the commands in the given text file. (Done on Dec.03.2022)
 Dec.03.2022 Kang:<br>
 Feature added and tested.
 
-Refactory:
-The programming structure has been refactored and converted to MVC architecture with Obeserver pattern. (Done on Dec.03.2022 by Kang)
-All correspond unit tests have been updated and tested. (Done on Dec.03.2022 by Kang)
+### Refactory:
+#### The programming structure has been refactored and converted to MVC architecture with Obeserver pattern. (Done on Dec.03.2022)
+#### All correspond unit tests have been updated and tested. (Done on Dec.03.2022)
