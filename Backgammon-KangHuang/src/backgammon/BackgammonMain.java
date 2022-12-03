@@ -17,7 +17,6 @@ public class BackgammonMain {
 	private static boolean end_flag = false;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		gameInitial();
 		while (end_flag == false) {
 			ArrayList<Integer> roll_result = new ArrayList<Integer>();
